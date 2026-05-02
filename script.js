@@ -10,6 +10,20 @@ const modalClose = document.querySelector(".modal-close");
 let glowFrame = null;
 let glowX = 0;
 let glowY = 0;
+const lockLandscapeOrientation = async () => {
+  const isMobile = window.matchMedia("(max-width: 760px), (pointer: coarse)").matches;
+  if (!isMobile || !screen.orientation?.lock) return;
+
+  try {
+    await screen.orientation.lock("landscape");
+  } catch (error) {
+    // Mobile browsers may require fullscreen or a user gesture before allowing orientation lock.
+  }
+};
+
+lockLandscapeOrientation();
+window.addEventListener("click", lockLandscapeOrientation, { once: true });
+window.addEventListener("touchend", lockLandscapeOrientation, { once: true });
 
 const setHeaderState = () => {
   header.classList.toggle("scrolled", window.scrollY > 24);
