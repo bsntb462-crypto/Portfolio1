@@ -39,7 +39,6 @@ window.addEventListener("resize", () => {
     menuToggle.setAttribute("aria-expanded", "false");
   }
 });
-
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -108,6 +107,7 @@ document.querySelectorAll(".play-video").forEach((button) => {
   button.addEventListener("click", () => {
     const video = document.createElement("video");
     video.src = button.dataset.video;
+    video.preload = "metadata";
     video.controls = true;
     video.autoplay = true;
     video.playsInline = true;
